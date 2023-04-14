@@ -1,10 +1,23 @@
 package main
 
-import "net/http"
+import (
+        "github.com/aws/aws-lambda-go/lambda"
+)
 
-func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {})
-
-	http.ListenAndServe("localhost:9090", nil)
+type request struct {
+	input string `json:"input"`
 }
 
+type response struct {
+	output string `json:"output"`
+}
+
+func HandleFunc(input request ) (response, error) {
+	var res response
+	res.output = input.input + " recieved"
+	return res, nil
+}
+
+func main()  {
+	lambda.Start(HandleFunc)
+}
