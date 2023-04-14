@@ -1,7 +1,7 @@
 package main
 
 import (
-        "github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
 type request struct {
@@ -12,12 +12,12 @@ type response struct {
 	output string `json:"output"`
 }
 
-func HandleFunc(input request ) (response, error) {
+func HandleFunc(input request) (response, error) {
 	var res response
 	res.output = input.input + " recieved"
 	return res, nil
 }
 
-func main()  {
+func main() {
 	lambda.Start(HandleFunc)
 }
